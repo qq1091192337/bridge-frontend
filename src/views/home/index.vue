@@ -1,21 +1,16 @@
 <template>
   <a-layout-content>
     <div class="homepage">
-
       <div class="parallax">
         <div class="parallax-content">
-
           <h1>桥梁病害的表冠病害识别</h1>
           <h2>大创项目团队</h2>
           <div class="buttons">
             <a-button class="arco-button" type="primary" @click="goToLogin">登录测试</a-button>
             <a-button class="arco-button" type="secondary" @click="goToTeam">团队信息</a-button>
           </div>
-
         </div>
-
       </div>
-
     </div>
     <scroll-slider/>
   </a-layout-content>

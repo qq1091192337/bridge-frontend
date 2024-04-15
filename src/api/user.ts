@@ -15,13 +15,13 @@ export interface UserState {
 export interface LoginData {
     username: string;
     password: string;
+    captcha_token: string;
 }
 export interface RegisterData {
     username: string;
     password: string;
     email: string;
     inviteCode: string;
-
 }
 export function getUserInfo(){
     return axios.post<UserState>('/api/user/info');

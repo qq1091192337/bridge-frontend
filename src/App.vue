@@ -2,9 +2,8 @@
 </script>
 
 <template>
-  <a-layout>
-
-  <router-view/>
+  <a-layout style="width: 100%">
+  <router-view />
   </a-layout>
 </template>
 

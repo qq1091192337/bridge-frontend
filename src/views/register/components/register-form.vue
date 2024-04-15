@@ -95,16 +95,19 @@
           返回登录
         </a-button>
       </a-space>
+      <recaptcha ref="captcha" @token-generated="handleTokenGenerated"/>
+
     </a-form>
   </div>
 </template>
 <script setup lang="ts">
-import {ref, reactive, getCurrentInstance} from 'vue';
-import { useRouter } from 'vue-router';
-import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-import { useUserStore } from "@/store/userStore";
-import type { RegisterData } from '@/api/user';
-import { IconLock, IconUser, IconMessage, IconGift } from "@arco-design/web-vue/es/icon";
+import {getCurrentInstance, reactive, ref, Ref} from 'vue';
+import {useRouter} from 'vue-router';
+import {ValidatedError} from '@arco-design/web-vue/es/form/interface';
+import {useUserStore} from "@/store/userStore";
+import type {RegisterData} from '@/api/user';
+import {IconGift, IconLock, IconMessage, IconUser} from "@arco-design/web-vue/es/icon";
+import recaptcha from "@/components/recaptcha/index.vue";
 
 const router = useRouter();
 const errorMessage = ref('');
@@ -118,10 +121,15 @@ const userInfo = reactive({
   confirmPassword: '',
   invitationCode: '',
 });
+const captcha: Ref<recaptcha | null> = ref(null);
+
+const handleTokenGenerated = (token: string) => {
+  console.log(token);
+};
 const Message=getCurrentInstance()?.appContext.config.globalProperties.$message;
-const validateConfirmPassword = async (rule: any, value: string) => {
+const validateConfirmPassword = async (value: any, cb: any) => {
   if (value !== userInfo.password) {
-    Message?.error('两次输入的密码不一致');
+    cb('两次输入的密码不一致');
   }
 };
 
@@ -136,6 +144,8 @@ const handleSubmit = async ({
   if (!errors) {
     loading.value = true;
     try {
+      values.captcha_token = await captcha.value!.verify();
+
       await userStore.register(values as RegisterData);
       Message?.success('注册成功！');
       router.push('/login');

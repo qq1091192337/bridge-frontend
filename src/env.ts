@@ -1,3 +1,3 @@
-const debug = process.env.NODE_ENV !== 'production';
+let debug = process.env.NODE_ENV !== 'production';
 
 export default debug;

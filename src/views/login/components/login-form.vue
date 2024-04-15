@@ -53,29 +53,33 @@
           注册
         </a-button>
       </a-space>
+      <recaptcha ref="captcha" @token-generated="handleTokenGenerated"/>
     </a-form>
   </div>
 </template>
 
 <script lang="ts" setup>
-  import { ref, reactive } from 'vue';
-  import { useRouter } from 'vue-router';
-  import { Message } from '@arco-design/web-vue';
-  import { ValidatedError } from '@arco-design/web-vue/es/form/interface';
-  import {useUserStore} from "@/store/userStore";
-  import type { LoginData } from '@/api/user';
-import {IconLock,IconUser} from "@arco-design/web-vue/es/icon";
+import {reactive, ref, Ref} from 'vue';
+import {useRouter} from 'vue-router';
+import {Message} from '@arco-design/web-vue';
+import {ValidatedError} from '@arco-design/web-vue/es/form/interface';
+import {useUserStore} from "@/store/userStore";
+import type {LoginData} from '@/api/user';
+import {IconLock, IconUser} from "@arco-design/web-vue/es/icon";
+import recaptcha from "@/components/recaptcha/index.vue";
 
-  const router = useRouter();
+const router = useRouter();
   const errorMessage = ref('');
   const userStore = useUserStore();
   const loading = ref(false);
-
+  const captcha: Ref<recaptcha | null> = ref(null);
   const userInfo = reactive({
     username: '',
     password: '',
   });
-
+  const handleTokenGenerated = (token: string) => {
+    console.log(token);
+  };
   const handleSubmit = async ({
     errors,
     values,
@@ -87,19 +91,22 @@ import {IconLock,IconUser} from "@arco-design/web-vue/es/icon";
     if (!errors) {
       loading.value=true;
       try {
-        await userStore.login(values as LoginData);
+        values.captcha_token=await captcha.value!.verify();
+
+        const loginData :{code:number}= await userStore.login(values as LoginData);
+        console.log(loginData);
         const { redirect, ...othersQuery } = router.currentRoute.value.query;
         router.push({
-          name: (redirect as string) || 'Workplace',
+          path: (redirect as string) || '/dashboard',
           query: {
             ...othersQuery,
           },
         });
         Message.success('登录成功！');
-        const { username, password } = values;
 
       } catch (err) {
         errorMessage.value = (err as Error).message;
+        console.error(err);
       } finally {
         loading.value=false;
       }

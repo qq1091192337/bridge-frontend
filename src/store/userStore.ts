@@ -23,7 +23,7 @@ export const useUserStore = defineStore("user", {
         setInfo(partial: Partial<UserState>) {
             this.$patch(partial as never);
         },
-        async login(loginForm: LoginData) {
+        async login(loginForm: LoginData): Promise<any>{
             try {
                 const res = await userLogin(loginForm);
                 setToken(res.data.token);
