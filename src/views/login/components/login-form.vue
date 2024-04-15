@@ -72,7 +72,7 @@ const router = useRouter();
   const errorMessage = ref('');
   const userStore = useUserStore();
   const loading = ref(false);
-  const captcha: Ref<recaptcha | null> = ref(null);
+  const captcha: Ref<typeof recaptcha | null> = ref(null);
   const userInfo = reactive({
     username: '',
     password: '',

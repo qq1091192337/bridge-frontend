@@ -121,7 +121,7 @@ const userInfo = reactive({
   confirmPassword: '',
   invitationCode: '',
 });
-const captcha: Ref<recaptcha | null> = ref(null);
+const captcha: Ref<typeof recaptcha | null> = ref(null);
 
 const handleTokenGenerated = (token: string) => {
   console.log(token);

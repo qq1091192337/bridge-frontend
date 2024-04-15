@@ -16,11 +16,11 @@
             :default-open-keys="['0']"
             :default-selected-keys="['0_2']"
         >
-          <a-sub-menu v-for="(menu, index) in routerConfig" :key="index">
+          <a-sub-menu v-for="(menu, index) in routerConfig" :key="index.toString()">
             <template #icon><component :is="menu.icon"></component></template>
 
             <template #title>{{ menu.title }}</template>
-            <a-menu-item v-for="(item, index) in menu.children" :key="index" @click="$router.push(item.path)">{{ item.title }}</a-menu-item>
+            <a-menu-item v-for="(item, index) in menu.children" :key="index.toString()" @click="$router.push(item.path)">{{ item.title }}</a-menu-item>
           </a-sub-menu>
         </a-menu>
 
