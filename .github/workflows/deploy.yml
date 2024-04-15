@@ -32,5 +32,5 @@ jobs:
           key: ${{ secrets.DEPLOY_KEY }}
           port: 22
           source: "dist/*"  # 根据你的构建输出目录调整这里
-          target: "/path/to/your/server/directory"
+          target: "/root/www/bridge-frontend"  # 你的项目部署目录
 
