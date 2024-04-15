@@ -1,7 +1,7 @@
 import {defineStore} from "pinia";
 import {getUserInfo, LoginData, RegisterData, userLogin, userLogout, userRegister, UserState} from "../api/user";
-import {clearToken, setAdmin, setToken} from "../utils/auth";
-import router from "../router";
+import {clearToken, setAdmin, setToken} from "@/utils/auth";
+// import router from "../router";
 
 export const useUserStore = defineStore("user", {
     state: () => ({
@@ -56,7 +56,7 @@ export const useUserStore = defineStore("user", {
             // const appStore = useAppStore();
             this.resetInfo();
             clearToken();
-            router.go(0);
+            // router.go(0);
             // removeRouteListener();
             // appStore.clearServerMenu();
         },
