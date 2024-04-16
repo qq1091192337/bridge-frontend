@@ -5,11 +5,10 @@
         <div class="parallax-content">
           <h1>桥梁病害的表冠病害识别</h1>
           <h2>大创项目团队</h2>
-          <div class="buttons">
-            <a-button class="arco-button" type="primary" @click="goToLogin">登录测试</a-button>
-            <a-button class="arco-button" type="secondary" @click="goToTeam">团队信息</a-button>
-          </div>
+          <a-button class="arco-button" type="primary" @click="goToLogin" size="large">登录测试</a-button>
+
         </div>
+
       </div>
     </div>
     <scroll-slider/>
@@ -30,9 +29,6 @@ function goToLogin() {
   router.push('/login');
 }
 
-function goToTeam() {
-  router.push('/team');
-}
 </script>
 
 <style scoped>
@@ -72,17 +68,8 @@ function goToTeam() {
   text-align: center;
 }
 
-.buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  width: 50%;
-}
 
-.arco-button {
-  margin-right: 20px;
-  margin-left: -10px;
-}
+
 
 .arco-button:hover {
   background-color: #8fd3f4;

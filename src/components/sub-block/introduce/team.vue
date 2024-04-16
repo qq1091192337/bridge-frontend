@@ -1,18 +1,16 @@
 <template>
 <div class="container">
   <div class="container-left">
-    <h1>团队介绍</h1>
-    <a-image>
-
-    </a-image>
+    <h1>{{title}}</h1>
+    <h2 v-if="!!subtitle">{{subtitle}}</h2>
   </div>
   <div class="container-right">
     <a-typography>
       <a-typography-title></a-typography-title>
 
     <a-typography-paragraph>
-      <a-typography-title></a-typography-title>
-      <a-typography-text>本团队是一个专业团队</a-typography-text>
+      <a-typography-title>{{rightTitle}}</a-typography-title>
+      <a-typography-text style="font-size: 1.6em ;line-height: 2em">{{rightText}}</a-typography-text>
     </a-typography-paragraph>
     </a-typography>
   </div>
@@ -21,7 +19,13 @@
 
 <script>
 export default {
-  name: "sub-summary"
+  name: "team",
+  props: {
+    title: String,
+    subtitle: String,
+    rightTitle: String,
+    rightText: String
+  }
 }
 </script>
 
@@ -35,7 +39,7 @@ export default {
   &-left{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: center;
     height: 100%;
 
   }
@@ -44,6 +48,7 @@ export default {
     flex-direction: column;
     justify-content: space-around;
     height: 100%;
+    max-width: 600px;
 
   }
 }
@@ -53,4 +58,12 @@ h1{
   color: #000;
   margin-bottom: 20px;
 }
+h2{
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 1rem;
+  color: #000;
+  margin-bottom: 20px;
+}
+
 </style>

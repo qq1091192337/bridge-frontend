@@ -29,6 +29,7 @@
 import { h, onMounted, ref} from 'vue';
 import Introduce from "@/components/sub-block/introduce.vue";
 import Work from "@/components/sub-block/work.vue";
+import Address from "@/components/sub-block/address.vue";
 class StickyNavigation {
   constructor() {
     this.currentId = null;
@@ -119,11 +120,12 @@ const slides=[
   {
     id:'tab-work',
     name:'作品简介',
-    component: "Work"
+    component: Work
   },
   {
     id:'tab-project',
-    name:'项目地址'
+    name:'项目地址',
+    component: Address
   },
   {
     id:'tab-contact',
@@ -178,7 +180,8 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   position: relative;
   background: #eee;
   text-align: center;
