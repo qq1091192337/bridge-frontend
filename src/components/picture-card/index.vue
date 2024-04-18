@@ -30,7 +30,6 @@
 <script setup lang="ts">
 import {defineProps, ref} from 'vue';
 import {Notification, Modal} from "@arco-design/web-vue";
-import {useAppStore} from "@/store/appStore";
 import DetailView from "@/views/dashboard/picture-view/detail-view.vue";
 const visible = ref(false);
 
