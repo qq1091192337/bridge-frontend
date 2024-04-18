@@ -213,10 +213,6 @@ a {
   background: #fff;
   z-index: 10;
 }
-.et-hero-tabs-container--top {
-  position: fixed;
-  top: 0;
-}
 
 .et-hero-tab {
   display: flex;
