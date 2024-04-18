@@ -16,11 +16,12 @@ onMounted(async () => {
     <PictureCard
         v-for="card in pictureCards"
         :key="card.id"
-        :src="card.cover"
+        :src="`${card.image_path}`"
         :location="card.location"
         :device="card.device"
-        :upload-date="card.uploadDate"
+        :upload-date="card.createdAt"
     />
+
   </a-space>
 </template>
 

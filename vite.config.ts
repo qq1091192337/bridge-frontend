@@ -6,12 +6,14 @@ import { resolve } from 'path';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [vue()],
-
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'src')
       // 其他别名配置
     },
+  },
+  esbuild: {
+    loader: 'ts'
   },
   css: {
     preprocessorOptions: {
@@ -33,6 +35,12 @@ export default defineConfig({
         changeOrigin: true, // 允许跨域
         ws: true,  // 允许websocket代理
         rewrite: (path) => path.replace(/^\/api/, '/api'), // 重写路径，去掉/api
+      },
+      '/uploads': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        ws: true,
+        rewrite: (path) => path.replace(/^\/uploads/, '/uploads'),
       }
     },
   },

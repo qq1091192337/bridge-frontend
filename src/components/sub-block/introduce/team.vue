@@ -10,7 +10,9 @@
 
     <a-typography-paragraph>
       <a-typography-title>{{rightTitle}}</a-typography-title>
-      <a-typography-text style="font-size: 1.6em ;line-height: 2em">{{rightText}}</a-typography-text>
+      <a-typography-text v-for="(text, index) in rightText" :key="index" :style="{ 'font-weight': text.bold ? 'bold' : 'normal', 'font-size': '1.6em', 'line-height': '2em' }">
+        {{text.content}}
+      </a-typography-text>
     </a-typography-paragraph>
     </a-typography>
   </div>
@@ -24,7 +26,7 @@ export default {
     title: String,
     subtitle: String,
     rightTitle: String,
-    rightText: String
+    rightText: Array
   }
 }
 </script>

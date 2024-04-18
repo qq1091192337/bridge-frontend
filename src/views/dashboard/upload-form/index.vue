@@ -1,11 +1,15 @@
 <template>
-  <a-modal v-model:visible="visible" title="上传图片">
+  <a-modal v-model:visible="visible"
+           title="上传图片"
+           @ok="handleSubmit"
+  >
     <a-upload
         :action="uploadUrl"
         :headers="headers"
         :before-upload="beforeUpload"
         :on-change="handleChange"
         :on-drop="handleDrop"
+        @success="handleSuccess"
         :multiple="true"
         :accept="'image/*'"
         name="file"
@@ -21,15 +25,16 @@
 <script setup lang="ts">
 
 import { ref } from 'vue';
-import axios from 'axios';
 import {FileItem} from "@arco-design/web-vue";
+import {processPicture} from "@/api/dashboard/picture-card";
 
 const visible = ref(false);
+const images=ref([]);
+
 const uploadUrl = '/api/picture-card/upload'; // 请替换为你的上传URL
 const headers = {
   'Authorization': 'Bearer ' + 'your-token', // 请替换为你的token
 };
-
 const beforeUpload = (file:File) => {
   const isImage = file.type.indexOf('image/') === 0;
   if (!isImage) {
@@ -48,9 +53,16 @@ const handleChange = (fileList:FileItem[],fileItem:FileItem) => {
     console.log('上传失败: ', fileItem.response);
   }
 };
-
+const handleSuccess = (res:any) => {
+  console.log('上传成功', res);
+  images.value.push(res.response.data.image);
+};
 const handleDrop = (e:Event) => {
   console.log('文件被拖到了上传区域', e);
+};
+const handleSubmit = () => {
+  console.log('提交图片', images.value);
+  processPicture( images.value[0].id);
 };
 </script>
 

@@ -8,6 +8,7 @@ import '@vuemap/vue-amap/dist/style.css'
 import {createPinia} from "pinia";
 import Http from "./http";
 import {createRouter, createWebHashHistory} from "vue-router";
+import {setupAuthGuard} from "./router/guards/auth";
 // import './http/mock'
 
 
@@ -32,6 +33,7 @@ const router =createRouter({
             path: '/dashboard',
             name: 'dashboard',
             component: () => import('./views/dashboard/index.vue'),
+            meta: { requiresAuth: true },
             redirect: '/dashboard/overview',
             children: [
                 { path: 'overview', component: () => import('./views/dashboard/overview/index.vue') },
@@ -40,6 +42,8 @@ const router =createRouter({
         },
     ]
 })
+
+setupAuthGuard(router);
 const app= createApp(App)
 
     .use(ArcoVue)

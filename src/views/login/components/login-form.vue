@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts" setup>
-import {reactive, ref, Ref} from 'vue';
+import {onMounted, reactive, ref, Ref} from 'vue';
 import {useRouter} from 'vue-router';
 import {Message} from '@arco-design/web-vue';
 import {ValidatedError} from '@arco-design/web-vue/es/form/interface';
@@ -67,7 +67,7 @@ import {useUserStore} from "@/store/userStore";
 import type {LoginData} from '@/api/user';
 import {IconLock, IconUser} from "@arco-design/web-vue/es/icon";
 import recaptcha from "@/components/recaptcha/index.vue";
-
+import {Notification} from "@arco-design/web-vue";
 const router = useRouter();
   const errorMessage = ref('');
   const userStore = useUserStore();
@@ -95,7 +95,7 @@ const router = useRouter();
 
         const loginData :{code:number}= await userStore.login(values as LoginData);
         console.log(loginData);
-        const { redirect, ...othersQuery } = router.currentRoute.value.query;
+        const { redirect,reason, ...othersQuery } = router.currentRoute.value.query;
         router.push({
           path: (redirect as string) || '/dashboard',
           query: {
@@ -112,7 +112,15 @@ const router = useRouter();
       }
     }
   };
+onMounted(() => {
 
+  if (router.currentRoute.value.query.reason) {
+    Notification.error({
+      title: '访问失败',
+      content:  router.currentRoute.value.query.reason as string,
+    });
+  }
+});
 </script>
 
 <style lang="less" scoped>

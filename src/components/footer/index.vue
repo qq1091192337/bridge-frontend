@@ -1,7 +1,7 @@
 <template>
   <div class="footer-wrapper">
     <a-layout-footer class="footer">
-      大创项目团队
+      大创项目团队 - Powered by @李嘉俊
     </a-layout-footer>
   </div>
 </template>

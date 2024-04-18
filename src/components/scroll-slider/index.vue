@@ -30,6 +30,7 @@ import { h, onMounted, ref} from 'vue';
 import Introduce from "@/components/sub-block/introduce.vue";
 import Work from "@/components/sub-block/work.vue";
 import Address from "@/components/sub-block/address.vue";
+import ContactUs from "@/components/sub-block/contactUs.vue";
 class StickyNavigation {
   constructor() {
     this.currentId = null;
@@ -129,7 +130,8 @@ const slides=[
   },
   {
     id:'tab-contact',
-    name: '联系我们'
+    name: '联系我们',
+    component: ContactUs
   }
 ]
 export default {

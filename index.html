@@ -10,6 +10,16 @@
   <body>
     <div id="app"></div>
     <script src="https://www.recaptcha.net/recaptcha/api.js?render=6LfSPMglAAAAALV_3KxQ_DYtShqfu7ogQYFQHgQj"></script>
+    <script>
+        // 先定义回调函数
+        function initAMap() {
+            // 此处定义地图初始化逻辑
+            // 你可以在此直接初始化地图，或者设置一些标志让Vue组件知道可以初始化地图了
+            window.initAMapLoaded = true; // 设置一个标志，表示高德地图SDK已加载
+        }
+    </script>
+    <script src="https://webapi.amap.com/maps?v=1.4.15&key=cc48462962886a97face3b796a618131&callback=initAMap"></script>
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

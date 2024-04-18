@@ -1,15 +1,19 @@
 <template>
   <a-card class="a-card" :title="`地点：${location || '未知' }`">
     <template #actions>
-      <a-button type="primary">查看</a-button>
+      <a-button type="primary" @click="handleDetail">查看</a-button>
       <a-button status="danger" @click="handleDelete">删除</a-button>
     </template>
     <template #cover>
-      <a-image :src="src"
-               alt=""
-               show-loader
-               :preview="false"
-               fit="fill"
+      <a-image
+          class="image-size"
+          :src="src"
+          alt=""
+          show-loader
+          :preview="false"
+          fit="contain"
+          width="200px"
+          height="200px"
       />
     </template>
 
@@ -19,16 +23,30 @@
     />
 
   </a-card>
+  <DetailView v-model:visible="visible" :src="selectedImageSrc" @close="handleClose" />
+
 </template>
 
 <script setup lang="ts">
-import {defineProps} from 'vue';
+import {defineProps, ref} from 'vue';
 import {Notification, Modal} from "@arco-design/web-vue";
+import {useAppStore} from "@/store/appStore";
+import DetailView from "@/views/dashboard/picture-view/detail-view.vue";
+const visible = ref(false);
+
+const detailViewVisible = ref(false);
+const selectedImageSrc = ref('');
+
+
+const handleClose = () => {
+  detailViewVisible.value = false;
+};
 const props = defineProps({
   src: String,
   location: String,
   device: String,
   uploadDate: String,
+  imageId: String,
 });
 
 const handleDelete = () => {
@@ -50,6 +68,9 @@ const handleDelete = () => {
     }
   });
 };
+const handleDetail = () => {
+  visible.value = true;
+};
 
 </script>
 
@@ -57,5 +78,9 @@ const handleDelete = () => {
 .a-card{
   width: 300px;
   margin: 20px;
+}
+.image-size {
+  max-width: 100%;
+  max-height: 100%;
 }
 </style>
