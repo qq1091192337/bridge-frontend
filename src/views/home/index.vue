@@ -25,7 +25,7 @@ import {useRouter} from 'vue-router';
 import {Button} from '@arco-design/web-vue';
 import Footer from '@/components/footer/index.vue';
 import ScrollSlider from '@/components/scroll-slider/index.vue'
-import {isLogin} from "@/utils/auth.js";
+import {isLogin} from "@/utils/auth";
 
 const router = useRouter();
 
