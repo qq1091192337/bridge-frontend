@@ -6,7 +6,7 @@
           <h1>桥梁病害的表冠病害识别</h1>
           <h2>大创项目团队</h2>
           <a-space>
-            <a-button class="arco-button" type="primary" @click="goToLogin" size="large" v-if="!isLogin">登录测试</a-button>
+            <a-button class="arco-button" type="primary" @click="goToLogin" size="large" v-if="!isLogin()">登录测试</a-button>
             <a-button  status="success" size="large" @click="goToDashboard" v-if="isLogin()" >进入测试</a-button>
           </a-space>
 
