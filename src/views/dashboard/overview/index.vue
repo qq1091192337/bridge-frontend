@@ -26,15 +26,21 @@
 import { ref, nextTick } from 'vue';
 import PictureView from "@/views/dashboard/picture-view/picture-view.vue";
 import UploadForm from '../upload-form/index.vue';
+import {getRecentUploadsCount} from "@/api/dashboard/picture-card";
 
-const weekUploads = ref(32); // 近七天图像上传数量
-const totalUploads = ref(54); // 总共图片上传数量
+const weekUploads = ref(0); // 近七天图像上传数量
+const totalUploads = ref(0); // 总共图片上传数量
 
 
 const renderChart = ref(false);
 const visible = ref(false);
 nextTick(() => {
   renderChart.value = true;
+});
+
+getRecentUploadsCount().then((res) => {
+  weekUploads.value = res.data.data.recentUploadsCount;
+  totalUploads.value = res.data.data.totalUploadsCount;
 });
 </script>
 

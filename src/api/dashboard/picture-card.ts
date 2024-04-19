@@ -18,3 +18,9 @@ export function processPicture(imageId: number) {
             imageId
     });
 }
+export function getMask(imageId: number) {
+    return axios.get( `/api/picture-card/mask/${imageId}`);
+}
+export function getRecentUploadsCount() {
+    return axios.get( '/api/picture-card/info/recent');
+}

@@ -20,6 +20,7 @@ onMounted(async () => {
         :location="card.location"
         :device="card.device"
         :upload-date="card.createdAt"
+        :image-id="card.id"
     />
 
   </a-space>

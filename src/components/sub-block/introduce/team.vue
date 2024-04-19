@@ -51,7 +51,6 @@ export default {
     justify-content: space-around;
     height: 100%;
     max-width: 600px;
-
   }
 }
 h1{

@@ -23,20 +23,24 @@
     />
 
   </a-card>
-  <DetailView v-model:visible="visible" :src="selectedImageSrc" @close="handleClose" />
+  <DetailView
+      v-model:visible="visible"
+      :image-src="src"
+      :masks="maskData"
+      @close="handleClose" />
 
 </template>
 
 <script setup lang="ts">
-import {defineProps, ref} from 'vue';
+import {defineProps, onMounted, ref} from 'vue';
 import {Notification, Modal} from "@arco-design/web-vue";
 import DetailView from "@/views/dashboard/picture-view/detail-view.vue";
+import {getMask} from "@/api/dashboard/picture-card";
 const visible = ref(false);
 
 const detailViewVisible = ref(false);
-const selectedImageSrc = ref('');
 
-
+const maskData = ref([]);
 const handleClose = () => {
   detailViewVisible.value = false;
 };
@@ -45,7 +49,7 @@ const props = defineProps({
   location: String,
   device: String,
   uploadDate: String,
-  imageId: String,
+  imageId: Number,
 });
 
 const handleDelete = () => {
@@ -58,8 +62,9 @@ const handleDelete = () => {
     okText: '删除',
     onOk: () => {
       console.log('删除');
-      Notification.success({
-        content: '删除成功',
+      Notification.error({
+        title: '删除失败',
+        content: '当前配置只有管理员才能删除图片',
       });
     },
     onCancel: () => {
@@ -71,6 +76,12 @@ const handleDetail = () => {
   visible.value = true;
 };
 
+onMounted(async () => {
+  getMask(props.imageId).then((res) => {
+    console.log(res);
+    maskData.value= res.data.mask;
+  });
+})
 </script>
 
 <style scoped>
