@@ -6,7 +6,7 @@ export const routerConfig = [
         icon: IconApps,
         children:[
             {title: 'Dashboard', path: '/dashboard/overview'},
-            {title: 'Picture View', path: '/dashboard/picture-view'},
+            // {title: 'Picture View', path: '/dashboard/picture-view'},
         ],
         // other key information
     },

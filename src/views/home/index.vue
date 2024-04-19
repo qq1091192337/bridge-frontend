@@ -5,7 +5,10 @@
         <div class="parallax-content">
           <h1>桥梁病害的表冠病害识别</h1>
           <h2>大创项目团队</h2>
-          <a-button class="arco-button" type="primary" @click="goToLogin" size="large">登录测试</a-button>
+          <a-space>
+            <a-button class="arco-button" type="primary" @click="goToLogin" size="large" v-if="!isLogin">登录测试</a-button>
+            <a-button  status="success" size="large" @click="goToDashboard" v-if="isLogin()" >进入测试</a-button>
+          </a-space>
 
         </div>
 
@@ -22,13 +25,16 @@ import {useRouter} from 'vue-router';
 import {Button} from '@arco-design/web-vue';
 import Footer from '@/components/footer/index.vue';
 import ScrollSlider from '@/components/scroll-slider/index.vue'
+import {isLogin} from "@/utils/auth.js";
 
 const router = useRouter();
 
 function goToLogin() {
   router.push('/login');
 }
-
+function goToDashboard() {
+  router.push('/dashboard');
+}
 </script>
 
 <style scoped>

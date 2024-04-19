@@ -40,6 +40,11 @@ const router =createRouter({
                 { path: 'picture-view', component: () => import('./views/dashboard/picture-view/index.vue') },
             ],
         },
+        {
+            path:'/User/profile',
+            name:'User',
+            component:()=>import('./views/User/profile/index.vue'),
+        }
     ]
 })
 
