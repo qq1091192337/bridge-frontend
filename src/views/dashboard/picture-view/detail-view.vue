@@ -1,6 +1,15 @@
 <template>
   <a-modal v-model:visible="visible" title="检测结果">
+    <template #title>
+      <a-space>
+        <span>检测结果</span>
+        <a-spin :loading="loading" v-if="loading"/>
+      </a-space>
+    </template>
+
+
     <div v-if="error" class="error-msg" v-html="appendErrorSuffix(error)"></div>
+
 
     <div class="wrapper">
       <div v-if="!imageSrc" class="viewer">Please select an image above</div>
@@ -8,6 +17,7 @@
         <canvas ref="canvasRef" class="canvas"></canvas>
 
       </div>
+
     </div>
   </a-modal>
 </template>
@@ -25,6 +35,7 @@ const props = defineProps({
 const error = ref('');
 const canvasRef = ref(null);
 const visible = ref(false);
+const loading= ref(true);
 const backgroundImageUrl = computed(() => {
   // 使用encodeURIComponent确保URL中的特殊字符被正确编码
 
@@ -37,6 +48,7 @@ const appendErrorSuffix = (error) => {
 
 watch([() => props.imageSrc, () => props.masks], ([newSrc, newMasks]) => {
   if (newSrc && newMasks.length) {
+    loading.value=false;
     drawMasks(newMasks);
   }
 }, {immediate: true});
