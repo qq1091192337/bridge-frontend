@@ -13,6 +13,7 @@
         :multiple="true"
         :accept="'image/*'"
         name="file"
+        :limit="1"
         draggable
     >
 

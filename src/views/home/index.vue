@@ -74,9 +74,6 @@ function goToDashboard() {
   text-align: center;
 }
 
-
-
-
 .arco-button:hover {
   background-color: #8fd3f4;
   border-color: #8fd3f4;

@@ -28,7 +28,7 @@
 
 .typography {
 
-  max-width: 75vw;
+  width: 100%;
   &-paragraph {
     text-align: left;
     line-height: 1.8em;
